@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse-CAC-MOVIES</title>
+    <link rel="stylesheet" href="./estilos.css">
+    <link rel="icon" href="./Imagenes/Logo_6.ico">
+    <!--Me falta conectar todo lo que tiene que ver con JS-->
+</head>
+
+<body class="bodyRegistrarse">
+    
+    <header class="headerRegistrarse">
+        <a class="anclaLogo" href="./index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1920 896v832q0 40-15 75t-41 61t-61 41t-75 15H320q-40 0-75-15t-61-41t-41-61t-15-75v-507q0-37 1-67t2-59t1-60t-4-67q-2-21-6-38t-8-34t-10-32t-11-38L22 541l1738-434l124 497L713 896zM681 508l-321 80l352 176l321-80zm543 129l322-81l-352-175l-322 80zm-1046 4l61 241l282-70zm1489-379l-282 71l342 171zm125 762H256v704q0 26 19 45t45 19h1408q26 0 45-19t19-45z"/></svg>
+            <span>CAC-Movies</span>
+        </a>
+    </header>
+
+    <main id="main" class="main">
+        <section data-aos="zoom-in" data-aos-duration="1000" class="seccionRegistrarse">
+            <form action="" method="get">
+                <h2 class="tituloRegistrarse">Registro</h2>
+                <div>
+                    <input type="text" placeholder="Nombre" id="nombre" name="nombre">
+                    <div class="error-text"></div>
+                </div>
+                <div>
+                    <input type="text" placeholder="Apellido" id="apellido" name="apellido">
+                    <div class="error-text"></div>
+                </div>
+                <div>
+                    <input type="email" placeholder="Email" id="email" name="email">
+                    <div class="error-text"></div>
+                </div>
+                <div>
+                    <input type="password" placeholder="Contraseña" id="password" name="password">
+                    <div class="error-text"></div>
+                </div>
+                <div>
+                    <input type="date" placeholder="Fecha de Nacimiento (dd/mm/aaaa)" id="fechaNacimiento" name="fechaNacimiento">
+                    <div class="error-text"></div>
+                </div>
+                <div>
+                    <select name="pais" id="pais">
+                        <option value="">Pais</option>
+                        <option value="AR">Argentina</option>
+                        <option value="BO">Bolivia</option>
+                        <option value="BR">Brasil</option>
+                        <option value="CH">Chile</option>
+                        <option value="CO">Colombia</option>
+                        <option value="EC">Ecuador</option>
+                        <option value="PY">Paraguay</option>
+                        <option value="PE">Perú</option>
+                        <option value="UR">Uruguay</option>
+                        <option value="VE">Venezuela</option>
+                    </select>
+                    <div class="error-text"></div>
+                </div>
+                <div class="terminos">
+                    <input type="checkbox" id="terminos" class="check">
+                    <label for="terminos" class="textocheck">Acepto Términos y Condiciones</label>
+                    <div class="error-text"></div>
+                </div>
+                <div>
+                    <input type="submit" value="Registrarse" class="boton">
+                </div>
+                <div>
+                    <a class="ayuda" href="#">¿Necesitas ayuda?</a>
+                </div>
+            </form>
+        </section>
+    </main>
+   
+    <!--Acá va supongo todo el código (script) de JS-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+   <script src="../js/valida_registrarse.js"></script>
+</body>
+</html>
