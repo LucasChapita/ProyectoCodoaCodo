@@ -31,7 +31,11 @@ body{
             color: #ffffff;
             font-weight: 700;
             font-size: 1.2rem;
-
+            &:hover{
+                animation-name: movimientoLogo;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
+            }
         }
         .listaNav{
             list-style: none;
@@ -534,7 +538,9 @@ body{
 
             /*animacion hover*/
             &:hover {
-                animation: tilt-n-move-shaking 0.25s infinite;
+                animation-name: movimientoLogo;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
             }
         }
         
@@ -860,4 +866,22 @@ hr {
     width: 80%;
     margin: 0 auto;
     margin-top: 40px;
+}
+
+@keyframes movimientoLogo {
+    0%{
+        transform: translate(0,0) rotate(0deg);
+    }
+    25%{
+        transform: translate(5px,5px) rotate(5deg);
+    }
+    50%{
+        transform: translate(0,0) rotate(0deg);
+    }
+    75%{
+        transform: translate(-5px, 5px) rotate(-5deg);
+    }
+    100%{
+        transform: translate(0,0) rotate(0deg);
+    }
 }
