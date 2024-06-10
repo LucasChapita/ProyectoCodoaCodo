@@ -1,10 +1,10 @@
-
+/*Esta línea añade un evento al documento que se activa cuando el contenido HTML ha sido completamente cargado y parseado. En otras palabras, se ejecuta cuando el DOM está listo para ser manipulado.*/
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
     form.addEventListener('submit', (event) => {
         if (!validateForm()) {
             console.log('El formulario no es válido. Por favor, corrige los errores.');
-            event.preventDefault(); // Evita que el formulario se envíe si hay errores de validación
+            event.preventDefault();
         } else {
             console.log('El formulario es válido. Enviar datos...');
         }
@@ -12,31 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const validateForm = () => {
         let isValid = true;
-        // Validar email
+        isValid = validateField('nombre', 'El nombre es obligatorio') && isValid;
+        isValid = validateField('apellido', 'El apellido es obligatorio') && isValid;
         isValid = validateEmailField('email', 'El correo electrónico no es válido') && isValid;
-        // Validar contraseña
         isValid = validateField('password', 'La contraseña es obligatoria') && isValid;
+        isValid = validateField('fechaNacimiento', 'La fecha de nacimiento es obligatoria') && isValid;
+        isValid = validateField('pais', 'El país es obligatorio') && isValid;
+        const terminos = document.getElementById('terminos').checked;
+        if (!terminos) {
+            isValid = false;
+            setErrorFor(document.getElementById('terminos'), 'Debes aceptar los términos y condiciones');
+        } else {
+            setSuccessFor(document.getElementById('terminos'));
+        }
+
         return isValid;
     };
 
     const validateField = (fieldId, errorMessage) => {
         const field = document.getElementById(fieldId);
         const value = field.value.trim();
-        // Si el valor del campo está vacío
         if (value === '') {
-            // Establece un mensaje de error
             setErrorFor(field, errorMessage);
-            // Devuelve false indicando que la validación ha fallado
             return false;
         } else {
-            // Si el valor del campo no está vacío, elimina cualquier mensaje de error anterior
             setSuccessFor(field);
-            // Devuelve true indicando que la validación ha tenido éxito
             return true;
         }
     };
 
-    // Función para validar el campo de correo electrónico
     const validateEmailField = (fieldId, errorMessage) => {
         const field = document.getElementById(fieldId);
         const email = field.value.trim();
@@ -52,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Función para establecer un mensaje de error en un campo
     const setErrorFor = (input, message) => {
         const formControl = input.closest('div');
         const errorText = formControl.querySelector('.error-text');
@@ -61,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         input.focus();
     };
 
-    // Función para eliminar un mensaje de error de un campo
     const setSuccessFor = (input) => {
         const formControl = input.closest('div');
         formControl.classList.remove('error');
@@ -69,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         errorText.innerText = '';
     };
 
-    // Función para validar si una cadena es una dirección de correo electrónico válida
     const isEmail = (email) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
@@ -87,14 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
     form.querySelectorAll('select').forEach(select => {
         select.addEventListener('change', () => {
             const value = select.value;
-            // Si se selecciona una opción, elimina cualquier mensaje de error
             if (value !== '') {
                 setSuccessFor(select);
             }
         });
     });
-
-
 });
-
-

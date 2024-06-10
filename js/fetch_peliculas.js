@@ -11,17 +11,11 @@ const options = {
     }
 };
 
-// Función para crear elementos HTML
 const createElement = (tag, className, attributes = {}) => {
-    // Creamos un nuevo elemento HTML del tipo especificado (tag)
     const element = document.createElement(tag);
-
-    // Si se especificó una clase, la añadimos al elemento
     if (className) {
         element.classList.add(className);
     }
-
-    // Iteramos sobre los atributos pasados como argumento y los añadimos al elemento
     Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
 
     // Devolvemos el elemento creado
@@ -76,56 +70,34 @@ const fetchMoviesGrid = async (page = 1) => {
 
 // Función para cargar películas en el carrusel de películas aclamadas
 const fetchMoviesFlex = async () => {
-    // Realizamos una petición fetch a la API para obtener las películas más aclamadas
     const response = await fetch(`${API_SERVER}/movie/top_rated`, options);
-
-    // Convertimos la respuesta a JSON
     const data = await response.json();
-
-    // Extraemos las películas de la respuesta
     const movies = data.results;
-
-    // Seleccionamos el contenedor de películas aclamadas en el DOM
     const aclamadasContainer = document.querySelector('.aclamadas');
-
-    // Iteramos sobre cada película obtenida
     movies.forEach(movie => {
-        // Creamos los elementos HTML para mostrar la película
         const peliculaItem = createElement('div', 'peliculaItem');
         const img = createElement('img', 'imgAclamada', {
             src: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
             alt: movie.title,
             loading: 'lazy'
         });
-
-        // Agregamos los elementos al DOM
-        peliculaItem.appendChild(img); // Agregamos la imagen al contenedor de la película
-        aclamadasContainer.appendChild(peliculaItem); // Agregamos el contenedor de la película al contenedor de películas aclamadas
+        peliculaItem.appendChild(img); 
+        aclamadasContainer.appendChild(peliculaItem);
     });
 };
 
-// Event listener para el botón "Anterior"
 document.querySelector('.anterior').addEventListener('click', () => {
-    // Obtener el número de página actual
     let currentPage = Number(document.querySelector('.peliculasTendencia').getAttribute('data-page'));
-    // Si es la primera página, no hacemos nada
     if (currentPage <= 1) return;
-    // Cargar las películas de la página anterior
     fetchMoviesGrid(currentPage - 1);
 });
 
-// Event listener para el botón "Siguiente"
 document.querySelector('.siguiente').addEventListener('click', () => {
-    // Obtener el número de página actual
     let currentPage = Number(document.querySelector('.peliculasTendencia').getAttribute('data-page'));
-    // Cargar las películas de la página siguiente
     fetchMoviesGrid(currentPage + 1);
 });
 
-// Ejecutamos las funciones de carga de películas al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-    // Cargamos las películas en la cuadrícula de tendencias
     fetchMoviesGrid();
-    // Cargamos las películas en el carrusel de películas aclamadas
     fetchMoviesFlex();
 });
